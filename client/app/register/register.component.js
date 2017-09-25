@@ -19,6 +19,8 @@ var RegisterComponent = /** @class */ (function () {
         this.alertService = alertService;
         this.model = {};
         this.loading = false;
+        this.otpStep = true;
+        this.finalStep = false;
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
@@ -26,11 +28,15 @@ var RegisterComponent = /** @class */ (function () {
         this.userService.create(this.model)
             .subscribe(function (data) {
             _this.alertService.success('Registration successful', true);
-            _this.router.navigate(['/login']);
+            //this.router.navigate(['/login']);
+            _this.otpStep = true;
         }, function (error) {
             _this.alertService.error(error);
             _this.loading = false;
         });
+    };
+    RegisterComponent.prototype.validateOTP = function () {
+        this.finalStep = true;
     };
     RegisterComponent = __decorate([
         core_1.Component({

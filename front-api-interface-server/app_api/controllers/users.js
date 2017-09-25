@@ -63,15 +63,10 @@ module.exports.userCreate = function(request, response) {
     //Collect the body information
     var reqBody = request.body;
 
-    if (!reqBody.username) {
+    if (!reqBody.mobilePhone) {
         response.json({
             success: false,
-            msg: 'Please pass username'
-        });
-    } else if (!reqBody.smsmobile) {
-        response.json({
-            success: false,
-            msg: 'Please pass mobile number.'
+            msg: 'Please pass Mobile Phone number'
         });
     }
     else if (!reqBody.email) {
@@ -90,8 +85,7 @@ module.exports.userCreate = function(request, response) {
         var user = new User({
             firstName: reqBody.firstName,
             lastName: reqBody.lastName,
-            username: reqBody.username,
-            smsmobile: reqBody.smsmobile,
+            mobilePhone: reqBody.mobilePhone,
             password: reqBody.password,
             email: reqBody.email,
             countryCode: +91
@@ -102,7 +96,7 @@ module.exports.userCreate = function(request, response) {
                 if (err.code == 11000) {
                     return response.json({
                         success: false,
-                        msg: "Username already exists"
+                        msg: "Phone Number already registered."
                     });
                 } else {
                     //Throw error message if not known
@@ -247,7 +241,7 @@ module.exports.getUser = function(request, response) {
                         success: true,
                         msg: {
                             username: user.username,
-                            smsmobile: user.smsmobile,
+                            mobilePhone: user.mobilePhone,
                             createdAt: user.createdAt,
                         }
                     });

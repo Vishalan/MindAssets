@@ -22,7 +22,7 @@ var UserService = /** @class */ (function () {
         return this.http.get('/users/' + _id).map(function (response) { return response.json(); });
     };
     UserService.prototype.create = function (user) {
-        return this.http.post('/users/user', user);
+        return this.http.post('/user', user);
     };
     UserService.prototype.update = function (user) {
         return this.http.put('/users/' + user._id, user);

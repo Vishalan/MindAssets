@@ -21,13 +21,9 @@ var UserSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    username: {
+    mobilePhone: {
         type: String,
         unique: true,
-        required: true
-    },
-    smsmobile: {
-        type: String,
         required: true
     },
     email:{
@@ -88,7 +84,7 @@ UserSchema.methods.sendAuthyToken = function(cb) {
 
     if (!self.authyId) {
         // Register this user if it's a new user
-        authy.register_user(self.email, self.smsmobile, self.countryCode,
+        authy.register_user(self.email, self.mobilePhone, self.countryCode,
             function(err, response) {
 
                 if (err || !response.user) return cb.call(self, err);
@@ -124,7 +120,7 @@ UserSchema.methods.verifyAuthyToken = function(otp, cb) {
 UserSchema.methods.sendMessage = function(message, cb) {
     var self = this;
     twilioClient.sendMessage({
-        to: self.countryCode + self.smsmobile,
+        to: self.countryCode + self.mobilePhone,
         from: config.twilioNumber,
         body: message
     }, function(err, response) {

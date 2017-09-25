@@ -11,6 +11,8 @@ import { AlertService, UserService } from '../_services/index';
 export class RegisterComponent {
     model: any = {};
     loading = false;
+    otpStep = true;
+    finalStep = false;
 
     constructor(
         private router: Router,
@@ -23,11 +25,16 @@ export class RegisterComponent {
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
+                    //this.router.navigate(['/login']);
+                    this.otpStep = true;
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+    validateOTP()
+    {
+        this.finalStep = true;
     }
 }
