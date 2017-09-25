@@ -13,28 +13,42 @@ export class RegisterComponent {
     loading = false;
     otpStep = true;
     finalStep = false;
-
+    msg_id = "";
     constructor(
         private router: Router,
         private userService: UserService,
         private alertService: AlertService) { }
+    validateOTP() {
+        this.otpStep = false;
+        this.finalStep = true;
+        this.userService.verify(this.msg_id,this.model)
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
 
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.finalStep = false;
+                });
+    }
     register() {
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(
                 data => {
+                    this.msg_id = data.json()["msg"];
                     this.alertService.success('Registration successful', true);
+                    console.log(this.msg_id);
                     //this.router.navigate(['/login']);
-                    this.otpStep = true;
+                    this.otpStep = false;
+                    this.loading = false;
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
-    validateOTP()
-    {
-        this.finalStep = true;
-    }
+
 }

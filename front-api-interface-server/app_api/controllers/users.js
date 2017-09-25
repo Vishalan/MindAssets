@@ -8,10 +8,10 @@ module.exports.authUser = function(request, response) {
 
     //Search to identify user
     User.findOne({
-        username: request.body.username
+        mobilePhone: request.body.mobilePhone
     }, function(err, user) {
 
-        //If we have an error, or the username is not present provide feedback.
+        //If we have an error, or the mobilePhone is not present provide feedback.
         if (err) throw err;
         if (!user) {
             response.send({
@@ -240,9 +240,8 @@ module.exports.getUser = function(request, response) {
                     response.json({
                         success: true,
                         msg: {
-                            username: user.username,
                             mobilePhone: user.mobilePhone,
-                            createdAt: user.createdAt,
+                            createdAt: user.createdAt
                         }
                     });
 

@@ -26,4 +26,7 @@ export class UserService {
     delete(_id: string) {
         return this.http.delete('/users/' + _id);
     }
+    verify(msg_id: string, user: User){
+        return this.http.post('/user/'+msg_id+'/verify',user);
+    }
 }

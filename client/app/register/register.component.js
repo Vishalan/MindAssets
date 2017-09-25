@@ -21,22 +21,36 @@ var RegisterComponent = /** @class */ (function () {
         this.loading = false;
         this.otpStep = true;
         this.finalStep = false;
+        this.msg_id = "";
     }
+    RegisterComponent.prototype.validateOTP = function () {
+        var _this = this;
+        this.otpStep = false;
+        this.finalStep = true;
+        this.userService.verify(this.msg_id, this.model)
+            .subscribe(function (data) {
+            _this.alertService.success('Registration successful', true);
+            _this.router.navigate(['/login']);
+        }, function (error) {
+            _this.alertService.error(error);
+            _this.finalStep = false;
+        });
+    };
     RegisterComponent.prototype.register = function () {
         var _this = this;
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(function (data) {
+            _this.msg_id = data.json()["msg"];
             _this.alertService.success('Registration successful', true);
+            console.log(_this.msg_id);
             //this.router.navigate(['/login']);
-            _this.otpStep = true;
+            _this.otpStep = false;
+            _this.loading = false;
         }, function (error) {
             _this.alertService.error(error);
             _this.loading = false;
         });
-    };
-    RegisterComponent.prototype.validateOTP = function () {
-        this.finalStep = true;
     };
     RegisterComponent = __decorate([
         core_1.Component({

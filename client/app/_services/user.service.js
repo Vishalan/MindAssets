@@ -30,6 +30,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.delete = function (_id) {
         return this.http.delete('/users/' + _id);
     };
+    UserService.prototype.verify = function (msg_id, user) {
+        return this.http.post('/user/' + msg_id + '/verify', user);
+    };
     UserService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])
