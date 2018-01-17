@@ -19,38 +19,78 @@ var RegisterComponent = /** @class */ (function () {
         this.alertService = alertService;
         this.model = {};
         this.loading = false;
-        this.otpStep = true;
+        this.otpStep = false;
         this.finalStep = false;
-        this.msg_id = "";
+        this.resend = false;
+        this.msg_id = '';
+        this.resendButtonText = 'Resend';
     }
     RegisterComponent.prototype.validateOTP = function () {
-        var _this = this;
-        this.otpStep = false;
         this.finalStep = true;
-        this.userService.verify(this.msg_id, this.model)
-            .subscribe(function (data) {
-            _this.alertService.success('Registration successful', true);
-            _this.router.navigate(['/login']);
-        }, function (error) {
-            _this.alertService.error(error);
-            _this.finalStep = false;
-        });
+        // this.userService.verify(this.msg_id,this.model)
+        //     .subscribe(
+        //         data => {
+        //             if(data['success'])
+        //             {
+        //               this.alertService.success('Registration successful', true);
+        //               this.router.navigate(['/login']);
+        //             }
+        //             else
+        //             {
+        //               this.alertService.error(data['msg']);
+        //             }
+        //
+        //         },
+        //         error => {
+        //             this.alertService.error(error);
+        //             this.finalStep = false;
+        //         });
+        this.alertService.success('Registration successful', true);
     };
     RegisterComponent.prototype.register = function () {
         var _this = this;
         this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(function (data) {
-            _this.msg_id = data.json()["msg"];
-            _this.alertService.success('Registration successful', true);
-            console.log(_this.msg_id);
-            //this.router.navigate(['/login']);
-            _this.otpStep = false;
-            _this.loading = false;
-        }, function (error) {
-            _this.alertService.error(error);
-            _this.loading = false;
-        });
+        this.userService.create(this.model);
+        // .subscribe(
+        //     data => {
+        //         if(data['success'])
+        //         {
+        //           this.msg_id = data['msg']['msg'];
+        //           this.alertService.success('Registration successful', true);
+        //           console.log(this.msg_id);
+        //           //this.router.navigate(['/login']);
+        //             this.otpStep = true;
+        //           this.loading = false;
+        //           setTimeout(() => {
+        //
+        //               this.resend = false;
+        //             }, 1000);
+        //         }
+        //         else
+        //         {
+        //           this.alertService.error(data['msg']);
+        //           this.loading = false;
+        //         }
+        //
+        //     },
+        //     error => {
+        //         this.alertService.error(error);
+        //         this.loading = false;
+        //     });
+        this.alertService.success('OTP Sent to Mobile', false);
+        console.log(this.msg_id);
+        //this.router.navigate(['/login']);
+        this.otpStep = true;
+        this.loading = false;
+        setTimeout(function () {
+            _this.resend = true;
+        }, 30000);
+    };
+    RegisterComponent.prototype.resendOTP = function () {
+        console.log("resendOTP");
+    };
+    RegisterComponent.prototype.changeDetails = function () {
+        this.otpStep = false;
     };
     RegisterComponent = __decorate([
         core_1.Component({

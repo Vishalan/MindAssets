@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+</head>
+
+
+<body>
+<div class="container">
+<div class="bg"></div>
+<br><br>
+
+	<div class="mainblock">
+		<div class="header text-center">
+		Register Here!!
+		</div>	
+		<div class="loginsignup center-block">
+			<div class="form">
+			<form action="register.php" method="post">
+			Email:<br><input type="email" placeholder="enter email" name="username" style="height:30px;" required />
+		<br><br>	Password:<br><input id="passwordid" type="password" placeholder="enter password" name="password" style="height:30px;" required>
+		<br><br> Confirm Password:<br><input id="cpasswordid" type="password" placeholder="repeat password" name="cpassword" style="height:30px;" required>
+		<br><br>
+		<script language="javascript">
+
+
+var password = document.getElementById("passwordid")
+  , confirm_password = document.getElementById("cpasswordid");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+			<input type="submit" value="Register" class="loginbut">
+			</form>
+			</div>
+		
+		
+
+	</div>
+</div>
+</div>
+</body>
+
+</html>

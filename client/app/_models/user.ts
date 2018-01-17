@@ -1,10 +1,10 @@
 ﻿export class User {
     _id: string;
-    username: string;
-    password: string;
-    smsmobile: string;
+    mobilePhone: string;
     firstName: string;
     lastName: string;
+    email: string;
+    password: string;
     emailotp: string;
     mobileotp: string;
 }

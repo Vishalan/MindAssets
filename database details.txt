@@ -1,0 +1,13 @@
+db name:resumebuilder
+db user name:mk
+db pass:mk123
+
+//username password of webhost
+mehvash.khan...
+MKrockzzz
+
+
+//db name for code
+db name:id346072_resumebuilder
+db user:id346072_mk
+db host:localhost

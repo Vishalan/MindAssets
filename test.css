@@ -1,0 +1,36 @@
+html, body {
+height: 100%;
+width: 100%;
+font-family: arial, sans-serif;
+}
+
+
+#header1 {
+
+    background-color: black;
+    /*Opacity start*/
+   opacity: 0.5;
+    filter: alpha(opacity=50);
+    /*Opacity end*/
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+#header-content {
+color:white;
+display:block;
+    margin: 10px;
+	
+	 position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    padding: 0;
+  
+}

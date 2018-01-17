@@ -1,0 +1,158 @@
+.main{
+		color:white;
+			
+			font-size:14px;
+			font-weight: bold;
+			font-family: "Calibri";
+    list-style-type: none;
+padding:0;
+margin:0;
+	
+	
+    position: fixed;
+	height:100%;
+	width:20%; 
+    background-color: #29333d;
+}
+a{
+	text-decoration:none !important;
+	
+	
+}
+
+.main, .sub {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+  
+
+.main li a {
+	width:auto;
+	color:white;
+    display: block;
+	padding:26px;
+	
+	
+-moz-transition: 0.3s ease;
+  -ms-transition:  0.3s ease;
+  -o-transition:  0.3s ease;
+  transition:  0.3s ease;
+	
+  
+}
+
+.main li a:hover:not(.active) {	
+
+    background-color: #47596b;
+     color:white;
+	 -webkit-transition-duration: 0.3s, 0.3s;
+ -webkit-transition-timing-function: linear, ease-in;
+}
+
+.main li a.active {
+    background-color: #47596b;
+    color: white;
+}
+
+.header{
+
+	font-family: "Calibri";
+margin-left:25%;
+}
+
+.form1{
+	
+background-color:white;
+	font-family: "Calibri";
+margin-left:30%;
+	padding:20px;
+}
+
+.button{
+	border:0px;
+color:white;
+float:right !important;
+margin-right:40px;
+background-color:#47596b;
+height:40px;
+width:90px;
+
+-moz-transition: 0.3s ease;
+  -ms-transition:  0.3s ease;
+  -o-transition:  0.3s ease;
+  transition:  0.3s ease;
+
+}
+
+.button:hover{
+background-color:#29333d;
+box-shadow:9px 9px 15px  #5c738a;
+-webkit-transition-duration: 0.3s, 0.3s;
+ -webkit-transition-timing-function: linear, ease;
+}
+
+input, select{
+height:30px;
+}
+
+
+.bg{
+  background: url('img3.jpg') no-repeat center center fixed;
+  content: '';
+  z-index: -1;
+  min-width: 1024px;
+  min-height: 100%;
+   width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+   background-attachment:fixed;
+  background-position:center;
+  background-size: cover;
+  background-repeat:no-repeat;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+
+.animated {
+    			-webkit-transition: height 0.2s;
+				-moz-transition: height 0.2s;
+				transition: height 0.2s;
+			}
+
+@media screen and (max-width: 1024px) { 
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+  .main{
+	  width:30%;
+  }
+form1{
+width:70%;
+}
+
+  .header{
+  font-size:30px;
+  margin-left:170px;
+  }
+  .form-group{
+	  form-size:10px;
+	  margin-left:35%;
+  }
+  input, select{
+	width:90%;  
+  }
+  .container-fluid { 
+  width: 100%; padding: 0px }
+  
+}

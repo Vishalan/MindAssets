@@ -16,17 +16,18 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post('/user', user);
+        return this.http.post('/user', user).map((response: Response) => response.json());
     }
 
     update(user: User) {
-        return this.http.put('/users/' + user._id, user);
+        return this.http.put('/users/' + user._id, user).map((response: Response) => response.json());
     }
 
     delete(_id: string) {
-        return this.http.delete('/users/' + _id);
+        return this.http.delete('/users/' + _id).map((response: Response) => response.json());
     }
     verify(msg_id: string, user: User){
-        return this.http.post('/user/'+msg_id+'/verify',user);
+      console.log('/user/'+msg_id+'/verify');
+        return this.http.post('/user/'+msg_id+'/verify',user).map((response: Response) => response.json());
     }
 }

@@ -22,16 +22,17 @@ var UserService = /** @class */ (function () {
         return this.http.get('/users/' + _id).map(function (response) { return response.json(); });
     };
     UserService.prototype.create = function (user) {
-        return this.http.post('/user', user);
+        return this.http.post('/user', user).map(function (response) { return response.json(); });
     };
     UserService.prototype.update = function (user) {
-        return this.http.put('/users/' + user._id, user);
+        return this.http.put('/users/' + user._id, user).map(function (response) { return response.json(); });
     };
     UserService.prototype.delete = function (_id) {
-        return this.http.delete('/users/' + _id);
+        return this.http.delete('/users/' + _id).map(function (response) { return response.json(); });
     };
     UserService.prototype.verify = function (msg_id, user) {
-        return this.http.post('/user/' + msg_id + '/verify', user);
+        console.log('/user/' + msg_id + '/verify');
+        return this.http.post('/user/' + msg_id + '/verify', user).map(function (response) { return response.json(); });
     };
     UserService = __decorate([
         core_1.Injectable(),

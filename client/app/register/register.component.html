@@ -1,6 +1,6 @@
 ﻿<div class="col-md-6 col-md-offset-3">
     <h2>Register</h2>
-    <form name="registerForm" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" novalidate>
+    <form name="registerForm" [hidden]="otpStep" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': registerForm.submitted && !firstName.valid }">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
@@ -8,7 +8,7 @@
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': registerForm.submitted && !lastName.valid }">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+            <input type="text"  class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
             <div *ngIf="registerForm.submitted && !lastName.valid" class="help-block">Last Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': registerForm.submitted && !mobilePhone.valid }">
@@ -27,27 +27,26 @@
             <div *ngIf="registerForm.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
         <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <button [disabled]="otpStep" class="btn btn-primary">Register</button>
             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+            <button [routerLink]="['/login']" class="btn btn-danger">Cancel</button>
         </div>
       </form>
-      <form name="otpForm" (ngSubmit)="otpForm.form.valid && validateOTP()" #otpForm="ngForm" novalidate>
+      <form [hidden]="!otpStep" name="otpForm" (ngSubmit)="otpForm.form.valid && validateOTP()" #otpForm="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': otpForm.submitted && !mobileotp.valid }">
             <label for="mobileotp">Mobile OTP</label>
-            <input [disabled]="false" type="mobileotp" class="form-control" name="mobileotp" [(ngModel)]="model.mobileotp" #mobileotp="ngModel" required />
+            <input  [disabled]="!otpStep" type="mobileotp" class="form-control" name="mobileotp" [(ngModel)]="model.mobileotp" #mobileotp="ngModel" required />
             <div *ngIf="otpForm.submitted && !mobileotp.valid" class="help-block">Mobile OTP is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': otpForm.submitted && !emailotp.valid }">
-            <label for="emailotp">Email OTP</label>
-            <input [disabled]="false" type="emailotp" class="form-control" name="emailotp" [(ngModel)]="model.emailotp" #emailotp="ngModel" required />
-            <div *ngIf="otpForm.submitted && !emailotp.valid" class="help-block">Email OTP is required</div>
+        <div class="form-group">
+            <button [disabled]="!otpStep" class="btn btn-primary">Confirm</button>
+            <img *ngIf="finalStep" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
         <div class="form-group">
-            <button [disabled]="false" class="btn btn-primary">Confirm</button>
-            <img *ngIf="finalStep" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/login']" class="btn btn-link">Change Email/Mobile</a>
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+            <button [disabled]="!resend" (click)="resendOTP()" class="btn btn-primary">Resend<br><span [hidden]="!otpStep || resend">Wait 30s...</span></button>
+
+            <button [disabled]="!resend" (click)="changeDetails()" class="btn btn-warning">Change Email/Mobile<br><span [hidden]="!otpStep || resend">Wait 30s...</span></button>
+            <button [routerLink]="['/login']" class="btn btn-danger">Cancel</button>
         </div>
     </form>
 </div>

@@ -147,17 +147,19 @@ module.exports.verify = function(request, response) {
     var user;
 
     // Load user model
-    User.findById(request.params.id, function(err, doc) {
+    User.findOne({
+        mobilePhone: request.body.mobilePhone
+    }, function(err, doc) {
         if (err || !doc) {
             return response.send({
                 success: false,
-                msg: "User not found for this ID"
+                msg: "User not found registered with this mobile phone"
             });
         }
 
         // If we find the user, let's validate the token they entered
         user = doc;
-        user.verifyAuthyToken(request.body.code, postVerify);
+        user.verifyAuthyToken(request.body.mobileotp, postVerify);
     });
 
     // Handle verification response
@@ -170,7 +172,7 @@ module.exports.verify = function(request, response) {
         }
 
         // If the token was valid, flip the bit to validate the user account
-        user.verified = true;
+        user.mobileVerified = true;
         user.save(postSave);
     }
 
@@ -254,6 +256,36 @@ module.exports.getUser = function(request, response) {
             success: false,
             msg: 'No token provided.'
         });
+    }
+};
+module.exports.resend = function(request, response) {
+    // Load user model
+    User.findOne({
+        mobilePhone: request.body.mobilePhone
+    }, function(err, user) {
+        if (err || !user) {
+            return die('User not found for this ID.');
+        }
+
+        // If we find the user, let's send them a new code
+        user.sendAuthyToken(postSend);
+    });
+
+    // Handle send code response
+    function postSend(err) {
+        if (err) {
+            return die('There was a problem sending you the code - please '
+                + 'retry.');
+        }
+
+        request.flash('successes', 'Code re-sent!');
+        response.redirect('/users/'+request.params.id+'/verify');
+    }
+
+    // respond with an error
+    function die(message) {
+        request.flash('errors', message);
+        response.redirect('/users/'+request.params.id+'/verify');
     }
 };
 

@@ -1,0 +1,94 @@
+
+
+.loginsignup{
+font-family:"Calibri";
+padding:20px;
+font-weight:bold;
+margin:35px;
+display:block;
+height:320px;
+width:230px;
+background-color:#f2f2f2;
+box-shadow:4px 4px 10px #b3b3b3;
+}
+
+.header{
+margin:10px;
+color:white;
+font-size:30px;
+padding:10px;
+}
+
+
+
+.form{
+font-weight:bold;
+	padding:0px;
+	
+}
+
+.loginbut{
+border:0px;
+color:white;
+width:100px;
+padding:7px;
+background-color:#339933;
+font-weight:bold;
+
+}
+.loginbut:hover{
+	box-shadow:7px 7px 15px  #999999;
+	
+
+}
+
+
+
+.bg{
+  background: url('img2.jpg') no-repeat center center fixed;
+  content: '';
+  z-index: -1;
+  min-width: 1024px;
+  min-height: 100%;
+   width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+   background-attachment:fixed;
+  background-position:center;
+  background-size: cover;
+  background-repeat:no-repeat;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+	.mainblock{
+	background-color:#3d4d5c;width:360px;height:520px;position:fixed;
+	}
+	
+@media screen and (max-width: 1024
+px) { 
+	 img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+	
+	
+input{
+	width:90%;  
+  }
+  .loginsignup{
+  padding:10px;
+  margin:35px;
+ align-items: center;
+  width:70%;
+  }
+  
+  
+  
+}
